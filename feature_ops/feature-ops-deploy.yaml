@@ -38,6 +38,5 @@ spec:
         args: 
           - -c
           - >-
-              pip freeze
               feast apply
         # command: ["feast", "apply"]

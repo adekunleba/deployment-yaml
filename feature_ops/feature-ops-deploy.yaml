@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: feature-ops
+  namespace: deploy-mlops
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: feature-ops
+  template:
+    metadata:
+      labels:
+        app: feature-ops
+    spec:
+      containers:
+      - image: tonytunde2012/feature_ops:latest
+        name: feature-ops

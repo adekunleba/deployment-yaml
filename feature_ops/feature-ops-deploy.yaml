@@ -34,4 +34,10 @@ spec:
               secretKeyRef:
                 name: feast-auths
                 key: awssecretaccesskey
-        command: ["feast", "apply"]
+        command: ["/bin/sh"]
+        args: 
+          - -c
+          - >-
+              pip install google-cloud-core==1.6.0  &&
+              feast apply
+        # command: ["feast", "apply"]

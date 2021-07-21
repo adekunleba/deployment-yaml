@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: feature-ops
+  namespace: deploy-mlops
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: feature-ops
+  template:
+    metadata:
+      labels:
+        app: feature-ops
+    spec:
+      containers:
+      - image: tonytunde2012/feature_ops:latest
+        name: feature-ops
+        env:
+          - name: VIEW_LOG_DATA
+            value: s3://deploy-mlops-data/view_log.parquet
+          - name: TRAIN_DATA
+            value: s3://deploy-mlops-data/train.parquet
+          - name: FEAST_S3_ENDPOINT_URL
+            value: http://minio.kubeflow.svc.cluster.local:9000 # assume we are using 
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: feast-auths
+                key: awsaccesskeyid
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: feast-auths
+                key: awssecretaccesskey
+        command: ["/bin/sh"]
+        args: 
+          - -c
+          - >-
+              feast apply
+        # command: ["feast", "apply"]

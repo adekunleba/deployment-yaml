@@ -4,5 +4,8 @@ metadata:
   name: feature-ops-service
   namespace: deploy-mlops
 spec:
+  ports:
+  - port: 5010
   selector:
     app: feature-ops
+    

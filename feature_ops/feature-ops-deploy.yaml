@@ -23,7 +23,7 @@ spec:
           - name: TRAIN_DATA
             value: s3://deploy-mlops-data/train.parquet
           - name: FEAST_S3_ENDPOINT_URL
-            value: http://minio.kubeflow.svc.cluster.local:9000 # assume we are using 
+            value: http://minio-service.kubeflow.svc.cluster.local:9000 # assume we are using 
           - name: AWS_ACCESS_KEY_ID
             value: minio
           - name: AWS_SECRET_ACCESS_KEY

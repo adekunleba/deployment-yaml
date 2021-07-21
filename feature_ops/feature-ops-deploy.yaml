@@ -34,3 +34,4 @@ spec:
               secretKeyRef:
                 name: feast-auths
                 key: awssecretaccesskey
+        command: ["feast", "apply"]

@@ -25,9 +25,15 @@ spec:
           - name: FEAST_S3_ENDPOINT_URL
             value: http://minio-service.kubeflow.svc.cluster.local:9000 # assume we are using 
           - name: AWS_ACCESS_KEY_ID
-            value: minio
+            valueFrom:
+              secretKeyRef:
+                name: feast-auths
+                key: awsaccesskeyid
           - name: AWS_SECRET_ACCESS_KEY
-            value: minio123
+            valueFrom:
+              secretKeyRef:
+                name: feast-auths
+                key: awssecretaccesskey
         command: ["/bin/sh"]
         args: 
           - -c
